@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module LFSR_struct(
+module lfsr_structural(
     input clk,
     input res_n,
     input [7:0] data_in,
