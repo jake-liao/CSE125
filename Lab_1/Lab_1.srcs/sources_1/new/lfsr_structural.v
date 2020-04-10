@@ -31,14 +31,14 @@ module lfsr_structural(
     busmux_8b_2_1 EightBitMux(.x(data_in[7:0]), .y(d_shift[7:0]), .sel(res_n), .f(flop_in[7:0]));
     
     // Flip Flop: reset is not used, CE is set to clk, Q initialized to 0
-    FDRE #(.INIT(1'b0)) FF0 (.C(clk), .R(), .CE(clk), .D(flop_in[0]), .Q(data_out[0]));
-    FDRE #(.INIT(1'b0)) FF1 (.C(clk), .R(), .CE(clk), .D(flop_in[1]), .Q(data_out[1]));
-    FDRE #(.INIT(1'b0)) FF2 (.C(clk), .R(), .CE(clk), .D(flop_in[2]), .Q(data_out[2]));
-    FDRE #(.INIT(1'b0)) FF3 (.C(clk), .R(), .CE(clk), .D(flop_in[3]), .Q(data_out[3]));
-    FDRE #(.INIT(1'b0)) FF4 (.C(clk), .R(), .CE(clk), .D(flop_in[4]), .Q(data_out[4]));
-    FDRE #(.INIT(1'b0)) FF5 (.C(clk), .R(), .CE(clk), .D(flop_in[5]), .Q(data_out[5]));
-    FDRE #(.INIT(1'b0)) FF6 (.C(clk), .R(), .CE(clk), .D(flop_in[6]), .Q(data_out[6]));
-    FDRE #(.INIT(1'b0)) FF7 (.C(clk), .R(), .CE(clk), .D(flop_in[7]), .Q(data_out[7]));
+    FDRE #(.INIT(1'b0)) FF0 (.C(clk), .R(1'b0), .CE(1'b1), .D(flop_in[0]), .Q(data_out[0]));
+    FDRE #(.INIT(1'b0)) FF1 (.C(clk), .R(1'b0), .CE(1'b1), .D(flop_in[1]), .Q(data_out[1]));
+    FDRE #(.INIT(1'b0)) FF2 (.C(clk), .R(1'b0), .CE(1'b1), .D(flop_in[2]), .Q(data_out[2]));
+    FDRE #(.INIT(1'b0)) FF3 (.C(clk), .R(1'b0), .CE(1'b1), .D(flop_in[3]), .Q(data_out[3]));
+    FDRE #(.INIT(1'b0)) FF4 (.C(clk), .R(1'b0), .CE(1'b1), .D(flop_in[4]), .Q(data_out[4]));
+    FDRE #(.INIT(1'b0)) FF5 (.C(clk), .R(1'b0), .CE(1'b1), .D(flop_in[5]), .Q(data_out[5]));
+    FDRE #(.INIT(1'b0)) FF6 (.C(clk), .R(1'b0), .CE(1'b1), .D(flop_in[6]), .Q(data_out[6]));
+    FDRE #(.INIT(1'b0)) FF7 (.C(clk), .R(1'b0), .CE(1'b1), .D(flop_in[7]), .Q(data_out[7]));
 endmodule
 
 // 8 bit bus multiplexor
