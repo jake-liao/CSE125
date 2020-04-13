@@ -24,9 +24,31 @@ module multiplier_1(
     input clk,
     input res_n,
     input start,
-    input done,
+    output reg done,
     input [15:0] arg1,
     input [15:0] arg2,
-    input [31:0] product
+    output reg [31:0] product
     );
+    integer i;
+    always @(posedge start)begin
+        done = 1'b0;
+        i = arg1 + 1;
+    end
+    always @(posedge clk)begin
+        i = i - 1;
+        if(i>0)begin
+            product = product + arg2;
+            
+        end
+
+        else if(i==0)begin
+            done = 1'b1;
+        end
+    end
+    always @(negedge res_n)begin
+        i = 1'b0;
+        done = 1'b0;
+        product = 1'b0;
+    end
+    
 endmodule
