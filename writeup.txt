@@ -1,0 +1,8 @@
+Jake Liao, Mark Zakharov
+Lab 1
+4-15-20
+
+PART 1.
+
+The Linear Feedback Shift Register (LFSR) is a series connection of flip flops, some of which are interconnected with XOR gates. The output of each flip flop is read serially to provide a pseudorandom binary integet. This pseudorandomness comes from the XOR gates changing some of the bits of what would otherwise be a rotating byte. Liao designed the structural module of the LFSR, using eight flip flops along side an 8-bit 2 to 1 multiplexor to control whether each flip flop would recieve its upcoming signal from the previous flip flop or from user inputted data. The multiplexor input was an active low reset signal, an asynchronous input from the user. Zakharov designed the behavioral module of the LFSR, using a positive edge clock and negative edge reset driven always block. The logic contained was an if else statement, where if the reset signal was set low then the flip flops would be set to the inputted data in parallel, otherwise the flip flops (which are the output registers) swap values with the flip flop before them, except for three who XOR their signal and the last flip flops signal.
+
