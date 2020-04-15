@@ -39,7 +39,7 @@ module multiplier_4(
             2'b00:
                 if (start) begin
                     product = 0;
-                    count = 0;
+                    count = arg2;
                     done = 1'b0;
                     state = 2'b01;
                 end
