@@ -1,25 +1,17 @@
+/* 
+ CSE125 Lab 1 Multiplier_4.v
+ Professor Heiner Litz
+ Mark Zarkharov 
+ Jake Liao
+
+ Moore state machine
+ DEFAULT initializes PRODUCT, COUNT, and DONE to 0 then transitions to STATE 00
+ STATE 00 maintains PRODUCT, COUNT, and DONE at 0 until START transitions to STATE 01
+ STATE 01 accumulates PRODUCT and increments COUNT until COUNT == ARG2 transitioning to STATE 10
+ STATE 10 maintains DONE at 1 until !RES_N which transitions to STATE 00
+ STATE 11 is unused, immediately transition to STATE 00  
+*/
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 04/08/2020 06:51:54 PM
-// Design Name: 
-// Module Name: multiplier_4
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
-
 module multiplier_4(
     input clk,
     input res_n,
@@ -31,46 +23,50 @@ module multiplier_4(
     );
     
     reg [1:0] state;
-
     integer count;
-        
+    
     always @(posedge clk) begin
         case (state)
             2'b00:
-                if (start) begin
-                    product = 0;
-                    count = arg2;
-                    done = 1'b0;
+                if (start) begin            // transition condition & change state
                     state = 2'b01;
                 end
+                else begin                  // state output
+                    product = 32'b0;
+                    count = 0;
+                    done = 1'b0;
+                    state = 2'b00;
+                end
             2'b01:
-                if (count == 0) begin
-
-                    done = 1'b1;
+                if (count == 0) begin       // transition condition & change state
                     state = 2'b10;
                 end
-                else if(count >= 4)begin
+                else if(count >= 4)begin    // ACCUMULATOR iff output >= 4
                     product = product + arg1*4;
                     count = count - 4;
-                    
+                    state = 2'b01;
                 end
-                else begin
+                else begin                  // ACCUMULATOR iff 4 > count > 0
                     product = product + arg1*count;
                     count = 0;
                     state = 2'b01;
-                    done = 1'b1;
                 end
             2'b10:
-                if (!res_n) begin
+                if (!res_n) begin           // transition condition & change state
                     state = 2'b00;
                 end
-                else begin 
+                else begin                  // state output
                     done = 1'b1;
+                    state = 2'b10;
                 end
-            2'b11: state = 2'b00;
-            default: state = 2'b00;
+            2'b11: state = 2'b00;           // unused state, transition to state 00
+            default:                        // initialization and transition to state 00
+                begin                       
+                    product = 0;
+                    count = 0;
+                    done = 1'b0;
+                    state = 2'b00;   
+                end
         endcase
-        
     end 
-
 endmodule

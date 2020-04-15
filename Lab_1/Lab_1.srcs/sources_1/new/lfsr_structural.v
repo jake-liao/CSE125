@@ -1,12 +1,18 @@
-`timescale 1ns / 1ps
-// FF set to data_in when res_n is 0 regardless of clock state
-//  CLK  |  res_n  |  data_in   |  output
-// ----------------------------------------
-//   0   |    0    |  data_in   |  data_in
-//   0   |    1    |  data_in   | no change
-//   1   |    0    |  data_in   |  data_in
-//   1   |    1    |  data_in   |   shift
+/* 
+ CSE125 Lab 1 lfsr_structural.v
+ Professor Heiner Litz
+ Jake Liao
+ Mark Zarkharov
 
+ FF set to data_in when res_n is 0 regardless of clock state
+  CLK  |  res_n  |  data_in   |  output
+ ----------------------------------------
+   0   |    0    |  data_in   |  data_in
+   0   |    1    |  data_in   | no change
+   1   |    0    |  data_in   |  data_in
+   1   |    1    |  data_in   |   shift
+*/
+`timescale 1ns / 1ps
 module lfsr_structural(
     input clk,
     input res_n,
