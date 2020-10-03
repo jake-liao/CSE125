@@ -26,7 +26,7 @@ module lfsr_behavioral(
     input [7:0] data_in,
     output reg [7:0] data_out
     );
-    //testesetwtstestest
+    
     always @(posedge clk) begin //asynchronous reset active low FFs
         if(!res_n) //update input values of FFs in parallel
         begin
